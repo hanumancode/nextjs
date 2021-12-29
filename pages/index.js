@@ -12,8 +12,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <div style={{fontSize: "5rem"}}>🌦🕵🏻‍♂️</div>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to Weather Inspector
         </h1>
 
         <p className={styles.description}>
