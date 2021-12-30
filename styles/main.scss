@@ -1,0 +1,460 @@
+$f-light: 300;
+$f-regular: 400;
+$f-semi-bold: 600;
+$f-bold: 700;
+$f-extra-bold: 800;
+
+// colors
+$dark: #242424;
+$primary: #4361ee;
+$secondary: #5e60ce;
+$tertiary: #22b0db;
+
+* {
+  -webkit-font-smoothing: antialiased;  
+  -moz-osx-font-smoothing: grayscale;  
+  box-sizing: border-box;
+}
+
+body {
+  margin: 16px;  
+  font-size: 100%;  
+  font-family: 'Open Sans', sans-serif;  
+  color: white;  
+  height: 100%;  
+  background: linear-gradient(to bottom, rgb(40, 47, 172) 0%, rgb(20, 140, 209) 100%);  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 1140px) {
+  .main-container {
+    width: 1120px;
+    margin: 16px auto;
+    font-size: 1.1em;
+  }
+}
+
+.location-and-date {  
+  width: 100%;
+}
+
+.location-and-date__location {
+  margin: 0;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.current-temperature {  
+  display: flex;  
+  margin-top: 0.25em;  
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  padding: 10px;
+}  
+
+.current-temperature.current-temperature-hot {  
+  background-color: rgba(252, 139, 33, 0.9);
+}  
+  
+.current-temperature__icon-container {  
+  flex-grow: 1.25;  
+  text-align: center;  
+}  
+  
+.current-temperature__content-container {  
+  flex-grow: 1;  
+  text-align: center;  
+}  
+  
+.current-temperature__icon {  
+  width: 10.5em;  
+}  
+  
+.current-temperature__value {  
+  font-size: 5.25em;  
+  font-weight: 300;
+}  
+  
+.current-temperature__summary {  
+  margin-top: -0.5em;  
+  margin-left: -0.6em;  
+  font-size: 1.125em;  
+}
+  
+.current-stats {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1em;
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+@media screen and (min-width: 700px) {
+  .current-stats {
+    margin-bottom: 1em;
+    padding-bottom: 0;
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+.current-stats__value {
+  margin-top: 1em;
+  font-size: 1.44em;
+}
+
+.current-stats__label {
+  color: rgba(255,255,255,0.6);
+}
+
+@media screen and (min-width: 768px) {
+  .current-temperature,
+  .current-stats {
+    width: 50%;
+  }
+}
+
+.weather-by-hour {
+  display: none;
+  width: 100%;
+}
+
+@media screen and (min-width: 700px) {
+  .weather-by-hour {
+    display: block;
+  }
+}
+
+.weather-by-hour__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather-by-hour__heading,
+.next-5-days__heading {
+  color: rgba(255,255,255,0.8);
+  font-size: 1em;
+  font-weight: normal;
+}
+
+@media screen and (min-width: 768px) {
+  .weather-by-hour__heading,
+  .next-5-days__heading {
+    font-size: 1.125em;
+  }
+}
+
+.weather-by-hour__item {
+  padding: 0.8em 0;
+  width: 13%;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.15);
+  font-size: 1.125em;
+  text-align: center;
+}
+
+@media screen and (min-width: 880px) {
+  .weather-by-hour__item {
+    width: 6.05em;
+  }
+}
+
+.weather-by-hour__hour {
+  margin-bottom: 0.5em;
+}
+
+.next-5-days {
+  width: 100%;
+  margin-top: 1em;
+}
+
+.next-5-days__container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.next-5-days__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0.3em;
+  padding: 0.8em 0;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.20);
+  font-size: 1.19em;
+  text-align: center;
+}
+
+.next-5-days__label {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.83em;
+}
+
+.next-5-days__date,
+.next-5-days__high,
+.next-5-days__low,
+.next-5-days__icon,
+.next-5-days__rain,
+.next-5-days__wind {
+  width: 33.33333%;
+  font-size: 0.95em;
+}
+
+.next-5-days__date,
+.next-5-days__high,
+.next-5-days__low {
+  margin-bottom: 0.6em;
+}
+
+@media screen and (min-width: 450px) {
+  .next-5-days__date,
+  .next-5-days__high,
+  .next-5-days__low,
+  .next-5-days__icon,
+  .next-5-days__rain,
+  .next-5-days__wind {
+    width: 16.666666%;
+    margin-bottom: initial;
+  }
+
+  .next-5-days__date {
+    order: -2;
+  }
+
+  .next-5-days__icon {
+    order: -1;
+  }
+}
+
+  .back-link {
+    display: inline-block;
+    text-decoration: none;
+    color: $primary;
+    font-weight: $f-semi-bold;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+.home {
+  width: 90vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  
+.searchBox {
+    width: 100%;
+    padding: 15px 15px;
+    border-radius: 10px;
+    border: 2px solid $primary;
+    font-size: 1.25rem;
+    color: $dark;
+    font-family: "Open Sans", sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  ul {
+    position: absolute;
+    top: calc(100% + 10px);
+    width: 100%;
+    padding: 5px 15px;
+    margin: 0;
+    list-style: none;
+    border: 2px solid $primary;
+    border-radius: 10px;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    li {
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      }
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: $dark;
+        font-weight: $f-semi-bold;
+        transition: all 0.3s ease;
+        width: 100%;
+        padding: 10px 0;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+
+  &__no-results {
+    padding: 15px 0;
+  }
+}
+
+.places {
+  margin-top: 30px;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  &__box {
+    flex: 0 0 25%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    a {
+      display: block;
+      width: 100%;
+      position: relative;
+      text-decoration: none;
+
+      &:hover {
+        span {
+          opacity: 1;
+        }
+
+        img {
+          opacity: 0.8;
+        }
+      }
+
+      span {
+        text-decoration: none;
+        font-weight: $f-bold;
+        color: $dark;
+        font-size: 1.25rem;
+        opacity: 0.9;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
+  &__image-wrapper {
+    position: relative;
+    padding-bottom: 125%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    img {
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: $primary;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  // box-shadow: 0 0 10px $primary, 0 0 5px $primary;
+  opacity: 1;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 15px;
+  right: 15px;
+}
+
+#nprogress .spinner-icon {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: $primary;
+  border-left-color: $primary;
+  border-radius: 50%;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
