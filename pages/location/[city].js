@@ -77,7 +77,7 @@ export default function City({ slug, data, city }) {
         <main className='main-container'>
 
             <Head>
-            <title>{city.name} Weather - Next Weather App</title>
+            <title>{city.name} - Weather Inspector</title>
             </Head>
 
             <div className="container">

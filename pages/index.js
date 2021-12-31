@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div style={{fontSize: "5rem"}}>🌦🕵🏻‍♂️</div>
+        <div style={{fontSize: "7rem"}}>🌦🕵🏻‍♂️</div>
         <h1 className={styles.title}>
           Weather Inspector
         </h1>
