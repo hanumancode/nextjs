@@ -2,10 +2,10 @@ import React from 'react';
 import cities from '../../lib/city.list.json';
 import moment from "moment-timezone";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
-import Link from "next/link";
 import Head from "next/head";
 import SearchBox from "../../components/SearchBox";
 import CitySearchBox from "../../components/CitySearchBox";
+import Header from "../../components/Header"
 
 export async function getServerSideProps(context) {
     
@@ -75,16 +75,13 @@ export default function City({ slug, data, city }) {
 
     return (
         <main className='main-container'>
-
+            
             <Head>
             <title>{city.name} - Weather Inspector</title>
             </Head>
-
+            <Header />
             <div className="container">
-            <Link href="/">
-                <a className="back-link" style={{color: "white"}}>&larr; Home</a>
-            </Link>
-            <CitySearchBox className="searchBox" />
+            <CitySearchBox />
             </div>
 
             <div className="location-and-date" style={{marginBottom: "10px"}}>

@@ -47,9 +47,6 @@ export default function CitySearchBox({ placeholder }) {
 
   return (
     <div className="citySearch">
-      <span style={{fontSize: "3rem"}}>🌦🕵🏻‍♂️</span>
-      <span style={{fontSize: "2rem"}}>Weather Inspector</span>
-    
       <div>  
             <input
                 style={{
@@ -58,9 +55,11 @@ export default function CitySearchBox({ placeholder }) {
                     border: "2px solid #4361ee",
                     borderRadius: "10px", 
                     padding: "15px 15px", 
+                    marginTop: "20px",
+                    marginBottom: "20px",
                     width: "100%", 
                     boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", 
-                    transition: "all 0.3s ease" 
+                    transition: "all 0.3s ease", 
                 }}
                 type="text"
                 value={query}
