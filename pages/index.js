@@ -4,6 +4,9 @@ import styles from '../styles/Home.module.css'
 import SearchBox from '../components/SearchBox'
 
 export default function Home() {
+
+  const d = new Date().getFullYear();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +18,7 @@ export default function Home() {
       <main className={styles.main}>
         <div style={{fontSize: "5rem"}}>🌦🕵🏻‍♂️</div>
         <h1 className={styles.title}>
-          Welcome to Weather Inspector
+          Weather Inspector
         </h1>
 
         <div className="container">
@@ -25,16 +28,9 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          
           <span className={styles.logo}>
-          Powered by - OpenWeatherMap & GLJMedia
+            Weather Inspector &copy; {d}
           </span>
-        </a>
       </footer>
     </div>
   )

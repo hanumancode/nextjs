@@ -1,5 +1,7 @@
 .container {
-  padding: 0 2rem;
+    padding: 0 2rem;
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
 
 .main {
@@ -42,7 +44,8 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 3rem;
+  padding: 20px;
 }
 
 .title,
