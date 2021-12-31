@@ -46,65 +46,65 @@ export default function CitySearchBox({ placeholder }) {
   };
 
   return (
-    <div className="citySearch">
-      <div>  
-            <input
-                style={{
-                    fontSize: "1rem",
-                    color: "#242424",
-                    border: "2px solid #4361ee",
-                    borderRadius: "10px", 
-                    padding: "15px 15px", 
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    width: "100%", 
-                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", 
-                    transition: "all 0.3s ease", 
-                }}
-                type="text"
-                value={query}
-                onChange={onChange}
-                placeholder={placeholder ? placeholder : "Search for a location"}
-            />
+    
+    <div>  
+          <input
+              style={{
+                  fontSize: "1rem",
+                  color: "#242424",
+                  border: "2px solid #4361ee",
+                  borderRadius: "10px", 
+                  padding: "15px 15px", 
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                  width: "100%", 
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", 
+                  transition: "all 0.3s ease", 
+              }}
+              type="text"
+              value={query}
+              onChange={onChange}
+              placeholder={placeholder ? placeholder : "Search for a location"}
+          />
 
-            {query.length > 3 && (
-                <ul style={{
-                    top: "calc(100% + 10px)",
-                    width: "100%",
-                    padding: "5px 15px",
-                    marginTop: "10px",
-                    listStyle: "none",
-                    border: "2px solid #4361ee",
-                    borderRadius: "10px",
-                    zIndex: "100",
-                    backgroundColor: "#fff"
-                }}>
+          {query.length > 3 && (
+              <ul style={{
+                  top: "calc(100% + 10px)",
+                  width: "100%",
+                  padding: "5px 15px",
+                  marginTop: "10px",
+                  listStyle: "none",
+                  border: "2px solid #4361ee",
+                  borderRadius: "10px",
+                  zIndex: "100",
+                  backgroundColor: "#fff"
+              }}>
 
-                {results.length > 0 ? (
-                    results.map((city) => {
-                    return (
-                        <li key={city.slug}>
-                        <Link href={`/location/${city.slug}`}>
-                            <a style={{
-                                display: "block",
-                                textDecoration: "none", 
-                                color: "#242424", 
-                                padding: "10px 0"
-                                }}>
-                            {city.name}
-                            {city.state ? `, ${city.state}` : ""}{" "}
-                            <span>({city.country})</span>
-                            </a>
-                        </Link>
-                        </li>
-                    );
-                    })
-                ) : (
-                    <li className="search__no-results">No results found</li>
-                )}
-                </ul>
-            )}
-        </div>
-    </div>
+              {results.length > 0 ? (
+                  results.map((city) => {
+                  return (
+                      <li key={city.slug}>
+                      <Link href={`/location/${city.slug}`}>
+                          <a style={{
+                              display: "block",
+                              textDecoration: "none", 
+                              color: "#242424", 
+                              padding: "10px 0"
+                              }}>
+                          {city.name}
+                          {city.state ? `, ${city.state}` : ""}{" "}
+                          <span>({city.country})</span>
+                          </a>
+                      </Link>
+                      </li>
+                  );
+                  })
+              ) : (
+                  <li className="search__no-results">No results found</li>
+              )}
+              </ul>
+          )}
+      </div>
+    
   );
 }

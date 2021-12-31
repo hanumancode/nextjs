@@ -2,14 +2,15 @@ import React from 'react';
 import { AppBar, Container, MenuItem, Select, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import Link from "next/link";
+import UserSidebar from './UserSidebar';
 
 const useStyles = makeStyles(() => ({
     title: {
         flex: 1,
+        // margin: "margin: 0 auto",
         color: "white",
         fontFamily: "Montserrat",
         fontWeight: "bold",
-        fontSize: "2rem",
         cursor: "pointer",
     }
 }))
@@ -22,15 +23,12 @@ const Header = () => {
         <AppBar color="transparent" position="static">
             <Container>
                 <Toolbar>
-                    <Typography className={classes.title}>
-                        
-                        
-                <Link href="/">
-                    <a className="back-link" style={{color: "white"}}>
-                       🌦🕵🏻‍♂️ Weather Inspector
-                    </a>
-                </Link>
-                        
+                    <Typography variant="h6" className={classes.title}>
+                        <Link href="/">
+                            <a className="back-link" style={{color: "white"}}>
+                            Weather Inspector 🌦🕵🏻‍♂️
+                            </a>
+                        </Link>
                     </Typography>
                     <Select
                         variant="outlined"
@@ -43,6 +41,7 @@ const Header = () => {
                         <MenuItem value="metric">Metric</MenuItem>
                         <MenuItem value="imperial">Imperial</MenuItem>
                     </Select>
+                    <UserSidebar />
                 </Toolbar>
             </Container>
         </AppBar>
