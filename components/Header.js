@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { AppBar, Container, MenuItem, Select, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import Link from "next/link";
 import UserSidebar from './UserSidebar';
 
+
 const useStyles = makeStyles(() => ({
     title: {
         flex: 1,
-        // margin: "margin: 0 auto",
+        margin: "margin: 0 auto",
         color: "white",
         fontFamily: "Montserrat",
         fontWeight: "bold",
@@ -18,6 +19,17 @@ const useStyles = makeStyles(() => ({
 const Header = () => {
     
     const classes = useStyles();
+    
+    const [unit, setUnit] = useState('imperial');
+    const [symbol, setSymbol] = useState('F');
+
+    useEffect(() => {
+        if (unit === "imperial") setSymbol("F");
+        else if (unit === "metric") setSymbol("C");
+    }, [unit]);
+
+    // const { unit, setUnit } = CryptoState();
+    console.log(unit);
 
     return (
         <AppBar color="transparent" position="static">
@@ -37,6 +49,8 @@ const Header = () => {
                             height: 40,
                             marginLeft: 15,
                         }}
+                        value={unit}
+                        onChange={(e) => setUnit(e.target.value)}
                     >
                         <MenuItem value="metric">Metric</MenuItem>
                         <MenuItem value="imperial">Imperial</MenuItem>

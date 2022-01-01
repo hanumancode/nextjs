@@ -1,11 +1,14 @@
 import "../styles/main.scss"
 // import Header from "../components/Header"
+import CryptoContext from "../CryptoContext"
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/* <Header /> */}
-      <Component {...pageProps} />
+      <CryptoContext>
+          {/* <Header /> */}
+          <Component {...pageProps} />
+      </CryptoContext>
     </>
   )
 }
