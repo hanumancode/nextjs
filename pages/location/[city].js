@@ -17,8 +17,6 @@ export async function getServerSideProps(context) {
         };
     }
     
-    console.log(process.env.API_KEY);
-    
     const unitValue = "imperial";
 
     const handleUnitChange = () => {
@@ -42,12 +40,9 @@ export async function getServerSideProps(context) {
     }
     
     console.log(data);
-
-    const slug = context.params.city;
     
     return {
         props: {
-            slug: slug,
             data: data,
             city: city,
         }
@@ -72,7 +67,6 @@ const getCity = param => {
         return null;
     }
 
-    // console.log(id);
 }
 
 const locationHandler = () => {
@@ -82,7 +76,7 @@ const locationHandler = () => {
 let tempSymbol = "F";
 
 
-export default function City({ slug, data, city }) {
+export default function City({ data, city }) {
     console.log(data);
 
     return (
@@ -102,7 +96,7 @@ export default function City({ slug, data, city }) {
             </div>
             <div className={(typeof data?.current != "undefined") 
             
-            ? ((data.current.temp > 20)
+            ? ((data.current.temp > 80)
             
             ? "current-temperature current-temperature-hot" : 'current-temperature')
             : 'current-temperature'}
