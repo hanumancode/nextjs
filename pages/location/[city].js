@@ -18,11 +18,20 @@ export async function getServerSideProps(context) {
     }
     
     console.log(process.env.API_KEY);
+    
+    const unitValue = "imperial";
 
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=ac683ae71d7181afc01abb7dd1e0b931&exclude=minutely&units=imperial`
-  );
+    const handleUnitChange = () => {
+        if(unitValue === "imperial") {
+            return "F"
+        } else {
+            return "C"
+        }
+    };  
 
+    const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=ac683ae71d7181afc01abb7dd1e0b931&exclude=minutely&units=${unitValue}`
+    );
 
     const data = await res.json();
 
@@ -70,6 +79,9 @@ const locationHandler = () => {
     console.log('location btn clicked')
 }
 
+let tempSymbol = "F";
+
+
 export default function City({ slug, data, city }) {
     console.log(data);
 
@@ -104,9 +116,9 @@ export default function City({ slug, data, city }) {
                     />
                 </div>  
             <div className="current-temperature__content-container">  
-                <div className="current-temperature__value">{(data.current.temp).toFixed(0)}&deg;C</div>  
+                <div className="current-temperature__value">{(data.current.temp).toFixed(0)}&deg;{tempSymbol}</div>  
                 <div className="current-stats__value" style={{marginBottom:"20px"}}>
-                    Feels like: {(data.current.feels_like).toFixed(0)}&deg;C
+                    Feels like: {(data.current.feels_like).toFixed(0)}&deg;{tempSymbol}
                 </div>  
                 <div className="current-temperature__summary">
                     {data.current.weather[0].description.charAt(0).toUpperCase()+data.current.weather[0].description.slice(1)}
@@ -116,7 +128,7 @@ export default function City({ slug, data, city }) {
 
             <div className="current-stats">
                 <div>
-                <div className="current-stats__value">{(data.daily[0].temp.max).toFixed(0)}/{(data.daily[0].temp.min).toFixed(0)}&deg;C</div>
+                <div className="current-stats__value">{(data.daily[0].temp.max).toFixed(0)}/{(data.daily[0].temp.min).toFixed(0)}&deg;{tempSymbol}</div>
                 <div className="current-stats__label">High/Low</div>
                 <div className="current-stats__value">{(data.current.pressure)}hPa</div>
                 <div className="current-stats__label">Pressure</div>
