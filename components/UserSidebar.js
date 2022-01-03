@@ -33,7 +33,7 @@ export default function UserSidebar() {
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-        hello
+        Weather Watchlist
           </Drawer>
         </React.Fragment>
       ))}
