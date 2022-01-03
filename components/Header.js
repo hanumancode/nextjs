@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/styles';
 import Link from "next/link";
 import UserSidebar from './UserSidebar';
 
-
 const useStyles = makeStyles(() => ({
     title: {
         flex: 1,
@@ -16,20 +15,13 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const Header = () => {
+const Header = ({title, unit, setUnit, symbol, setSymbol}) => {
     
     const classes = useStyles();
     
-    const [unit, setUnit] = useState('imperial');
-    const [symbol, setSymbol] = useState('F');
 
-    useEffect(() => {
-        if (unit === "imperial") setSymbol("F");
-        else if (unit === "metric") setSymbol("C");
-    }, [unit]);
-
-    // const { unit, setUnit } = CryptoState();
     console.log(unit);
+    
 
     return (
         <AppBar color="transparent" position="static">
@@ -38,7 +30,7 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link href="/">
                             <a className="back-link" style={{color: "white"}}>
-                            Weather Inspector 🌦🕵🏻‍♂️
+                            {title}
                             </a>
                         </Link>
                     </Typography>

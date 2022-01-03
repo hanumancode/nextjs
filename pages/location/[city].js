@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { makeStyles } from '@material-ui/styles';
 import cities from '../../lib/city.list.json';
 import moment from "moment-timezone";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import Head from "next/head";
-import SearchBox from "../../components/SearchBox";
-import CitySearchBox from "../../components/CitySearchBox";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import SearchBox from '../../components/SearchBox';
 import Header from "../../components/Header"
 
 export async function getServerSideProps(context) {
@@ -19,14 +19,6 @@ export async function getServerSideProps(context) {
     
     const unitValue = "imperial";
 
-    const handleUnitChange = () => {
-        if(unitValue === "imperial") {
-            return "F"
-        } else {
-            return "C"
-        }
-    };  
-
     const res = await fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=ac683ae71d7181afc01abb7dd1e0b931&exclude=minutely&units=${unitValue}`
     );
@@ -38,9 +30,7 @@ export async function getServerSideProps(context) {
             notFound: true,
         };
     }
-    
-    console.log(data);
-    
+        
     return {
         props: {
             data: data,
@@ -69,26 +59,50 @@ const getCity = param => {
 
 }
 
-const locationHandler = () => {
-    console.log('location btn clicked')
-}
-
-let tempSymbol = "F";
-
-
 export default function City({ data, city }) {
-    console.log(data);
+    // console.log(data);
+
+    const useStyles = makeStyles(() => ({
+        title: {
+            flex: 1,
+            // margin: "margin: 10px, 10px, 0, 10px",
+            color: "white",
+            fontFamily: "Montserrat",
+            fontWeight: "bold",
+            cursor: "pointer",
+        }
+    }))
+
+    const classes = useStyles();
+    
+    const [unit, setUnit] = useState('imperial');
+    const [symbol, setSymbol] = useState('F');
+
+    useEffect(() => {
+        if (unit === "imperial") setSymbol("F");
+        else if (unit === "metric") setSymbol("C");
+    }, [unit]);
+
+    console.log(unit);
 
     return (
+
         <main className='main-container'>
-            
             <Head>
             <title>{city.name} - Weather Inspector</title>
             </Head>
-            <Header />
-            <div className="container">
-            <CitySearchBox />
+
+             <Header title="Weather Inspector 🌦🕵🏻‍♂️"
+                unit = {unit}
+                setUnit = {setUnit}
+                symbol = {symbol}
+                setSymbol = {setSymbol}
+            />
+            <div className="container" style={{marginTop: 20}}>
+                <SearchBox />
             </div>
+
+{/* Rendered Weather Data */}
 
             <div className="location-and-date" style={{marginBottom: "10px"}}>
                 <h1 className="location-and-date__location">{city.name}</h1>
@@ -110,9 +124,9 @@ export default function City({ data, city }) {
                     />
                 </div>  
             <div className="current-temperature__content-container">  
-                <div className="current-temperature__value">{(data.current.temp).toFixed(0)}&deg;{tempSymbol}</div>  
+                <div className="current-temperature__value">{(data.current.temp).toFixed(0)}&deg;{symbol}</div>  
                 <div className="current-stats__value" style={{marginBottom:"20px"}}>
-                    Feels like: {(data.current.feels_like).toFixed(0)}&deg;{tempSymbol}
+                    Feels like: {(data.current.feels_like).toFixed(0)}&deg;{symbol}
                 </div>  
                 <div className="current-temperature__summary">
                     {data.current.weather[0].description.charAt(0).toUpperCase()+data.current.weather[0].description.slice(1)}
@@ -122,7 +136,7 @@ export default function City({ data, city }) {
 
             <div className="current-stats">
                 <div>
-                <div className="current-stats__value">{(data.daily[0].temp.max).toFixed(0)}/{(data.daily[0].temp.min).toFixed(0)}&deg;{tempSymbol}</div>
+                <div className="current-stats__value">{(data.daily[0].temp.max).toFixed(0)}/{(data.daily[0].temp.min).toFixed(0)}&deg;{symbol}</div>
                 <div className="current-stats__label">High/Low</div>
                 <div className="current-stats__value">{(data.current.pressure)}hPa</div>
                 <div className="current-stats__label">Pressure</div>
@@ -163,7 +177,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     />        
-                    <div>{(data.hourly[1].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[1].temp).toFixed(0)}&deg;{symbol}</div>
                 </div>
                 <div className="weather-by-hour__item">
                     <div className="weather-by-hour__hour">
@@ -174,7 +188,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     />                     
-                    <div>{(data.hourly[2].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[2].temp).toFixed(0)}&deg;{symbol}    </div>
                 </div>
                 <div className="weather-by-hour__item">
                     <div className="weather-by-hour__hour">                        
@@ -185,7 +199,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     /> 
-                    <div>{(data.hourly[3].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[3].temp).toFixed(0)}&deg;{symbol}</div>
                 </div>
                 <div className="weather-by-hour__item">
                     <div className="weather-by-hour__hour">                        
@@ -196,7 +210,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     /> 
-                    <div>{(data.hourly[4].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[4].temp).toFixed(0)}&deg;{symbol}</div>
                 </div>
                 <div className="weather-by-hour__item">
                     <div className="weather-by-hour__hour">
@@ -207,7 +221,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     /> 
-                    <div>{(data.hourly[5].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[5].temp).toFixed(0)}&deg;{symbol}</div>
                 </div>
                 <div className="weather-by-hour__item">
                     <div className="weather-by-hour__hour">
@@ -218,7 +232,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     />                     
-                    <div>{(data.hourly[6].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[6].temp).toFixed(0)}&deg;{symbol}</div>
                 </div>
                 <div className="weather-by-hour__item">
                     <div className="weather-by-hour__hour">
@@ -229,7 +243,7 @@ export default function City({ data, city }) {
                         alt="Weather icon"
                         
                     /> 
-                    <div>{(data.hourly[7].temp).toFixed(0)}&deg;C</div>
+                    <div>{(data.hourly[7].temp).toFixed(0)}&deg;{symbol}</div>
                 </div>
                 </div>
             </div>
@@ -247,7 +261,7 @@ export default function City({ data, city }) {
         </div>
 
         <div className="next-5-days__low">
-          {(data.daily[1].temp.max).toFixed(0)}/{(data.daily[1].temp.min).toFixed(0)}&deg;C
+          {(data.daily[1].temp.max).toFixed(0)}/{(data.daily[1].temp.min).toFixed(0)}&deg;{symbol}
         </div>
 
         <div className="next-5-days__icon">
@@ -280,7 +294,7 @@ export default function City({ data, city }) {
         </div>
 
         <div className="next-5-days__low">
-          {(data.daily[2].temp.max).toFixed(0)}/{(data.daily[2].temp.min).toFixed(0)}&deg;C
+          {(data.daily[2].temp.max).toFixed(0)}/{(data.daily[2].temp.min).toFixed(0)}&deg;{symbol}
         </div>
 
         <div className="next-5-days__icon">
@@ -313,7 +327,7 @@ export default function City({ data, city }) {
         </div>
 
         <div className="next-5-days__low">
-          {(data.daily[3].temp.max).toFixed(0)}/{(data.daily[3].temp.min).toFixed(0)}&deg;C
+          {(data.daily[3].temp.max).toFixed(0)}/{(data.daily[3].temp.min).toFixed(0)}&deg;{symbol}
         </div>
 
         <div className="next-5-days__icon">
@@ -346,7 +360,7 @@ export default function City({ data, city }) {
         </div>
 
         <div className="next-5-days__low">
-          {(data.daily[4].temp.max).toFixed(0)}/{(data.daily[4].temp.min).toFixed(0)}&deg;C
+          {(data.daily[4].temp.max).toFixed(0)}/{(data.daily[4].temp.min).toFixed(0)}&deg;{symbol}
         </div>
 
         <div className="next-5-days__icon">
@@ -378,7 +392,7 @@ export default function City({ data, city }) {
         </div>
 
         <div className="next-5-days__low">
-          {(data.daily[5].temp.max).toFixed(0)}/{(data.daily[5].temp.min).toFixed(0)}&deg;C
+          {(data.daily[5].temp.max).toFixed(0)}/{(data.daily[5].temp.min).toFixed(0)}&deg;{symbol}
         </div>
 
         <div className="next-5-days__icon">
